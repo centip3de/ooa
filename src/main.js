@@ -1,6 +1,7 @@
 import Link from './link/Link';
 import Rooms from './room/Rooms';
 import Header from './Header';
+import Textbox from './gui/Textbox';
 
 var canvas = document.getElementById('canvas'),
     ctx = canvas.getContext('2d');
@@ -17,6 +18,7 @@ var world = {
     tick: 0,
     header: new Header(),
     link: new Link(),
+    gui: new Textbox({ text:"Bar\nBaz" }),
     room: Rooms.Room2,
 };
 
@@ -64,6 +66,7 @@ function animate() {
     } else {
         world.room.update(world);
         world.link.update(world);
+        world.gui.update(world);
     }
 
     ctx.clearRect(0, 0, 160, 144);
@@ -75,6 +78,7 @@ function animate() {
         world.room.draw(ctx);
         world.header.draw(ctx);
         world.link.draw(ctx);
+        world.gui.draw(ctx);
     }
 
     ++world.tick;
