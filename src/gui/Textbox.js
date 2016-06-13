@@ -45,6 +45,17 @@ export default class Textbox
         /* Draw the text */
         ctx.font = this.font;
         ctx.fillStyle = this.textColor;
-        ctx.fillText(this.text[this.textIndex], 20, 110);
+
+        var textLen = this.text[this.textIndex].length;
+
+        if(textLen >= 14)
+        {
+            ctx.fillText(this.text[this.textIndex].slice(0, 14), 20, 110);
+            ctx.fillText(this.text[this.textIndex].slice(14, textLen), 20, 125);
+        }
+        else
+        {
+            ctx.fillText(this.text[this.textIndex], 20, 110);
+        }
     }
 }

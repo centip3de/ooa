@@ -18,7 +18,7 @@ var world = {
     tick: 0,
     header: new Header(),
     link: new Link(),
-    gui: new Textbox({ text:"Bar\nBaz" }),
+    gui: new Textbox({ text:"Foo Bar Baz Candy\nBaz" }),
     room: Rooms.Room2,
 };
 
