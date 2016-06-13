@@ -50,12 +50,23 @@ export default class Textbox
 
         if(textLen >= 14)
         {
-            ctx.fillText(this.text[this.textIndex].slice(0, 14), 20, 110);
-            ctx.fillText(this.text[this.textIndex].slice(14, textLen), 20, 125);
+            for(let i = 0; i < 14; i++)
+            {
+                /* Each character is like, 9 pixels wide or somethin'. So use that for the offset.*/
+                ctx.fillText(this.text[this.textIndex].charAt(i), 20 + (i * 9), 110);
+            }
+
+            for(let i = 14; i < textLen; i++)
+            {
+                ctx.fillText(this.text[this.textIndex].charAt(i), 20 + ((i - 14) * 9), 125);
+            }
         }
         else
         {
-            ctx.fillText(this.text[this.textIndex], 20, 110);
+            for(let i = 0; i < textLen; i++)
+            {
+                ctx.fillText(this.text[this.textIndex].charAt(i), 20 + (i * 9), 110);
+            }
         }
     }
 }
