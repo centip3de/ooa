@@ -22,7 +22,7 @@ export default class Textbox
 
     update(world)
     {
-        if(world.keys.DOWN)
+        if(world.keys.Z)
         {
             if(this.textIndex < this.text.length)
             {
