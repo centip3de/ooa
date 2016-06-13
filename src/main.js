@@ -66,7 +66,10 @@ function animate() {
     } else {
         world.room.update(world);
         world.link.update(world);
-        world.gui.update(world);
+        if(world.gui)
+        {
+            world.gui.update(world);
+        }
     }
 
     ctx.clearRect(0, 0, 160, 144);
@@ -78,7 +81,17 @@ function animate() {
         world.room.draw(ctx);
         world.header.draw(ctx);
         world.link.draw(ctx);
-        world.gui.draw(ctx);
+        if(world.gui)
+        {
+            if(world.gui.done)
+            {
+                delete world.gui;
+            }
+            else
+            {
+                world.gui.draw(ctx);
+            }
+        }
     }
 
     ++world.tick;

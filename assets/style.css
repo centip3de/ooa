@@ -3,12 +3,7 @@ body
     margin: 0;
     padding: 0;
 }
-#load
-{
-    font-family: "Zelda";
-    visibility: hidden;
-    height: 0px;
-}
+
 @font-face
 {
     font-family: "Zelda";

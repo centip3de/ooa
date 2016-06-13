@@ -2,77 +2,49 @@ export default class Textbox
 {
     constructor(args)
     {
-        /* Defaults */
-        this.x          = 10;
-        this.y          = 95;
-        this.width      = 140;
-        this.height     = 40;
-        this.text       = "Foo";
-        this.textColor  = "#917518"
-        this.bgColor    = "#000000"
-        this.font       = "15px Zelda";
+        /* Select either the defaults, or the passed in args. */
+        this.x          = args.x || 10
+        this.y          = args.y || 95;
+        this.width      = args.width || 140; 
+        this.height     = args.height || 40;
+        this.text       = args.text || "Foo";
+        this.textColor  = args.textColor || "#917518";
+        this.bgColor    = args.bgColor || "#000000";
+        this.font       = args.font || "15px Zelda";
 
-        /* Parse args */
-        for(var key in args)
-        {
-            switch(key)
-            {
-                case "x":
-                    this.x = args[key];
-                    break;
-                case "y":
-                    this.y = args[key];
-                    break;
-                case "width":
-                    this.width = args[key];
-                    break;
-                case "height":
-                    this.height = args[key];
-                    break;
-                case "text":
-                    this.text = args[key];
-                    break;
-                case "textColor":
-                    this.textColor = args[key];
-                    break;
-                case "bgColor":
-                    this.bgColor = args[key];
-                    break;
-                case "font":
-                    this.font = args[key];
-                    break;
-                default:
-                    break;
-            }
-        }
-
+        /* Break up the text into multiple parts, for scrollin' */
         this.text = this.text.split("\n");
         this.textIndex = 0;
+
+        /* FIXME: At some point this shouldn't be like it is, but it do. */
+        this.done       = false;
     }
 
     update(world)
     {
         if(world.keys.DOWN)
         {
-            this.textIndex++;
+            if(this.textIndex < this.text.length)
+            {
+                ++this.textIndex;
+            }
+            else
+            {
+                this.done = true;
+            }
         }
     }
 
     draw(ctx)
     {
-        /* Only draw if we need to. */
-        if(this.textIndex <= this.text.length)
-        {
+        /* Draw the black box */
+        ctx.rect(this.x, this.y, this.width, this.height);
+        ctx.fillStyle = this.bgColor;
+        ctx.fill();
 
-            /* Draw the black box */
-            ctx.rect(this.x, this.y, this.width, this.height);
-            ctx.fillStyle = this.bgColor;
-            ctx.fill();
-
-            /* Draw the text */
-            ctx.font = this.font;
-            ctx.fillStyle = this.textColor;
-            ctx.fillText(this.text[this.textIndex], 20, 110);
-        }
+        /* Draw the text */
+        ctx.font = this.font;
+        ctx.fillStyle = this.textColor;
+        ctx.fillText(this.text[this.textIndex], 20, 110);
     }
 }
